@@ -4,6 +4,7 @@
     background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
     padding: 2rem;
     animation: fadeIn 0.6s ease-out;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Titre */
@@ -23,7 +24,7 @@
 /* Grille des films */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2rem;
     margin-bottom: 3rem;
 }
@@ -70,6 +71,9 @@
     position: relative;
     overflow: hidden;
     animation: fadeInUp 0.6s ease-out both;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .card::before {
@@ -94,8 +98,99 @@
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
+/* Poster du film */
+.moviePoster {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 2/3;
+    min-height: 200px;
+    position: relative;
+}
+
+.moviePoster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .moviePoster img {
+    transform: scale(1.05);
+}
+
+/* Placeholder pour poster manquant */
+.moviePosterPlaceholder {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+    aspect-ratio: 2/3;
+    min-height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.placeholderIcon {
+    font-size: 3rem;
+    opacity: 0.5;
+}
+
+/* Note du film en haut à droite */
+.movieRating {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #FFD700;
+    padding: 0.25rem 0.5rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    z-index: 2;
+}
+
+/* Informations du film */
+.movieInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.movieTitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #E6E6E6;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.movieYear {
+    font-size: 0.9rem;
+    color: #B0B0B0;
+    margin: 0;
+    font-weight: 500;
+}
+
+.movieOverview {
+    font-size: 0.85rem;
+    color: #CCCCCC;
+    line-height: 1.4;
+    margin: 0;
+    flex: 1;
+}
+
 /* Bouton de suppression */
-.card button {
+.deleteButton {
     background: linear-gradient(135deg, #E50914 0%, #B81D24 100%);
     color: #ffffff;
     border: none;
@@ -104,16 +199,16 @@
     font-weight: 600;
     cursor: pointer;
     border-radius: 25px;
-    margin-top: 1rem;
     width: 100%;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
     letter-spacing: 0.025em;
     text-transform: uppercase;
+    margin-top: auto;
 }
 
-.card button::before {
+.deleteButton::before {
     content: '';
     position: absolute;
     top: 0;
@@ -124,23 +219,23 @@
     transition: left 0.6s ease;
 }
 
-.card button:hover::before {
+.deleteButton:hover::before {
     left: 100%;
 }
 
-.card button:hover {
+.deleteButton:hover {
     background: linear-gradient(135deg, #B81D24 0%, #8B0000 100%);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
 }
 
-.card button:active {
+.deleteButton:active {
     transform: translateY(0);
     box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
 }
 
 /* Focus pour l'accessibilité */
-.card button:focus {
+.deleteButton:focus {
     outline: 2px solid rgba(229, 9, 20, 0.6);
     outline-offset: 2px;
 }
@@ -180,7 +275,7 @@
     }
 
     .grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 1.5rem;
     }
 
@@ -188,9 +283,13 @@
         padding: 1.25rem;
     }
 
-    .card button {
+    .deleteButton {
         padding: 0.625rem 1.25rem;
         font-size: 0.85rem;
+    }
+
+    .movieTitle {
+        font-size: 1.1rem;
     }
 }
 
@@ -205,7 +304,7 @@
     }
 
     .grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1rem;
     }
 
@@ -213,7 +312,7 @@
         padding: 1rem;
     }
 
-    .card button {
+    .deleteButton {
         padding: 0.5rem 1rem;
         font-size: 0.8rem;
     }
@@ -228,6 +327,14 @@
 
     .empty h3 {
         font-size: 1.25rem;
+    }
+
+    .movieTitle {
+        font-size: 1rem;
+    }
+
+    .movieOverview {
+        font-size: 0.8rem;
     }
 }
 

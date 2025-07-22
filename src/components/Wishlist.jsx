@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { WishlistContext } from '../context/WishlistProvider';
-import MovieCard from './MovieCard';
 import styles from '../styles/Wishlist.module.css';
 
 export default function Wishlist() {
@@ -20,8 +19,52 @@ export default function Wishlist() {
                 <div className={styles.grid}>
                     {wishlist.map(movie => (
                         <div key={movie.id} className={styles.card}>
-                            <MovieCard movie={movie} />
+                            {/* Image du film avec note en overlay */}
+                            {movie.poster_path ? (
+                                <div className={styles.moviePoster}>
+                                    <img
+                                        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                        alt={movie.title}
+                                        loading="lazy"
+                                    />
+                                    {/* Note en haut à droite */}
+                                    {movie.vote_average && (
+                                        <div className={styles.movieRating}>
+                                            ⭐ {movie.vote_average.toFixed(1)}
+                                        </div>
+                                    )}
+                                </div>
+                            ) : (
+                                <div className={styles.moviePosterPlaceholder}>
+                                    <span className={styles.placeholderIcon}>🎬</span>
+                                    {/* Note en haut à droite même pour placeholder */}
+                                    {movie.vote_average && (
+                                        <div className={styles.movieRating}>
+                                            ⭐ {movie.vote_average.toFixed(1)}
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {/* Informations du film */}
+                            <div className={styles.movieInfo}>
+                                <h3 className={styles.movieTitle}>{movie.title}</h3>
+                                <p className={styles.movieYear}>
+                                    {movie.release_date ? new Date(movie.release_date).getFullYear() : 'Date inconnue'}
+                                </p>
+                                {movie.overview && (
+                                    <p className={styles.movieOverview}>
+                                        {movie.overview.length > 120
+                                            ? `${movie.overview.substring(0, 120)}...`
+                                            : movie.overview
+                                        }
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Bouton de suppression */}
                             <button
+                                className={styles.deleteButton}
                                 onClick={() => removeFromWishlist(movie.id)}
                                 aria-label={`Supprimer ${movie.title} de la liste d'envies`}
                             >
