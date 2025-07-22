@@ -1,0 +1,450 @@
+/* Container principal */
+.container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+    padding: 2rem;
+}
+
+/* Titre */
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(135deg, #E50914 0%, #B81D24 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2rem;
+    text-shadow: 0 4px 8px rgba(229, 9, 20, 0.3);
+}
+
+/* Section des contrôles */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    align-items: center;
+}
+
+/* Container des catégories */
+.categories {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Boutons de catégorie */
+.btn {
+    background-color: transparent;
+    border: 2px solid rgba(229, 9, 20, 0.6);
+    color: #E6E6E6;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    position: relative;
+    overflow: hidden;
+    min-width: 120px;
+    text-align: center;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:hover {
+    background-color: rgba(229, 9, 20, 0.1);
+    border-color: #E50914;
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.3);
+}
+
+.btn.active {
+    background: linear-gradient(135deg, #E50914 0%, #B81D24 100%);
+    border-color: #E50914;
+    color: #ffffff;
+    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn.active:hover {
+    background: linear-gradient(135deg, #B81D24 0%, #8B0000 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(229, 9, 20, 0.5);
+}
+
+/* Champ de recherche */
+.search {
+    width: 100%;
+    max-width: 400px;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    color: #E6E6E6;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    outline: none;
+}
+
+.search::placeholder {
+    color: #777777;
+}
+
+.search:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #E50914;
+    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.1);
+}
+
+/* État de chargement */
+.loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    color: #E50914;
+    font-size: 1.25rem;
+    font-weight: 600;
+    gap: 1rem;
+}
+
+.loadingSpinner {
+    width: 3rem;
+    height: 3rem;
+    border: 3px solid rgba(229, 9, 20, 0.2);
+    border-top: 3px solid #E50914;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Grille des films */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.gridTransitioning {
+    opacity: 0.7;
+    transform: translateY(10px);
+}
+
+/* Message vide amélioré */
+.empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #777777;
+    padding: 4rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.emptyIcon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+}
+
+.empty h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #E6E6E6;
+    margin-bottom: 0.5rem;
+}
+
+.empty p {
+    font-size: 1rem;
+    color: #999999;
+}
+
+/* Section pagination améliorée */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Boutons de pagination */
+.pageBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #E50914 0%, #B81D24 100%);
+    color: #ffffff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    min-width: 140px;
+    justify-content: center;
+}
+
+.pageBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.pageBtn:hover::before {
+    left: 100%;
+}
+
+.pageBtn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #B81D24 0%, #8B0000 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(229, 9, 20, 0.4);
+}
+
+.pageBtn:disabled {
+    background: linear-gradient(135deg, #770000 0%, #550000 100%);
+    cursor: not-allowed;
+    opacity: 0.5;
+    transform: none;
+    box-shadow: none;
+}
+
+.btnIcon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.prevBtn:hover:not(:disabled) .btnIcon {
+    transform: translateX(-3px);
+}
+
+.nextBtn:hover:not(:disabled) .btnIcon {
+    transform: translateX(3px);
+}
+
+/* Info de pagination stylisée */
+.pageInfo {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    font-size: 1.25rem;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.pageNumber {
+    color: #E50914;
+    font-size: 1.5rem;
+}
+
+.pageSeparator {
+    color: #666666;
+    margin: 0 0.5rem;
+}
+
+.totalPages {
+    color: #E6E6E6;
+}
+
+/* Animations d'entrée pour les cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.grid > * {
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .controls {
+        gap: 1rem;
+    }
+
+    .categories {
+        gap: 0.5rem;
+        padding: 0.75rem;
+        border-radius: 25px;
+    }
+
+    .btn {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.85rem;
+        min-width: 100px;
+    }
+
+    .search {
+        max-width: 100%;
+        padding: 0.875rem 1.25rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .pagination {
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    .pageBtn {
+        padding: 0.875rem 1.5rem;
+        min-width: 120px;
+        font-size: 0.9rem;
+    }
+
+    .pageInfo {
+        padding: 0.875rem 1.5rem;
+        font-size: 1.1rem;
+        min-width: 100px;
+    }
+
+    .pageNumber {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .categories {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 0.75rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .pagination {
+        gap: 0.75rem;
+    }
+
+    .pageBtn {
+        flex: 1;
+        min-width: 0;
+        padding: 0.75rem 1rem;
+    }
+
+    .empty {
+        padding: 3rem 1.5rem;
+    }
+
+    .emptyIcon {
+        font-size: 3rem;
+    }
+
+    .empty h3 {
+        font-size: 1.25rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* États de focus pour l'accessibilité */
+.btn:focus,
+.pageBtn:focus,
+.search:focus {
+    outline: 2px solid #E50914;
+    outline-offset: 2px;
+}
+
+.btn:focus {
+    outline-color: rgba(229, 9, 20, 0.6);
+}
+
+/* Amélioration de la lisibilité */
+.btn,
+.pageBtn {
+    letter-spacing: 0.025em;
+}
+
+.search {
+    letter-spacing: 0.01em;
+}
